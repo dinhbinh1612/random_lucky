@@ -5,12 +5,14 @@ class BasicAppButton extends StatelessWidget {
   final VoidCallback onPressed;
   final String title;
   final double? height;
+  final Color? colors;
 
   const BasicAppButton({
     super.key,
     required this.onPressed,
     required this.title,
     this.height,
+    this.colors,
   });
 
   @override
@@ -19,7 +21,10 @@ class BasicAppButton extends StatelessWidget {
       onPressed: onPressed,
       style:
           ElevatedButton.styleFrom(minimumSize: Size.fromHeight(height ?? 80)),
-      child: Text(title),
+      child: Text(
+        title,
+        style: TextStyle(color: colors ?? Colors.white),
+      ),
     );
   }
 }
