@@ -1,8 +1,13 @@
-import 'package:dart01/page/home_page.dart';
+import 'package:dart01/core/configs/theme/app_theme.dart';
+import 'package:dart01/presentation/splash/pages/splash.dart';
+import 'package:device_preview_plus/device_preview_plus.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(DevicePreview(
+    builder: (context) => MyApp(),
+    enabled: true,
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -11,11 +16,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Radom lucky',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: HomePage(),
+      theme: AppTheme.lightTheme,
+      home: SplashPage(),
       debugShowCheckedModeBanner: false,
     );
   }
