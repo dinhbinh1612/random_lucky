@@ -4,6 +4,7 @@ import 'package:dart01/common/widgets/button/basic_app_button.dart';
 import 'package:dart01/core/configs/assets/app_images.dart';
 import 'package:dart01/core/configs/assets/app_vectors.dart';
 import 'package:dart01/core/configs/theme/app_colors.dart';
+import 'package:dart01/presentation/auth/pages/signup_or_signin.dart';
 import 'package:dart01/presentation/choose_mode/bloc/theme_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -55,7 +56,7 @@ class ChooseModePage extends StatelessWidget {
                         GestureDetector(
                           onTap: () => context
                               .read<ThemeCubit>()
-                              .updateTheme(ThemeMode.light),
+                              .updateTheme(ThemeMode.dark),
                           child: ClipOval(
                             child: BackdropFilter(
                               filter: ImageFilter.blur(
@@ -95,7 +96,7 @@ class ChooseModePage extends StatelessWidget {
                         GestureDetector(
                           onTap: () => context
                               .read<ThemeCubit>()
-                              .updateTheme(ThemeMode.dark),
+                              .updateTheme(ThemeMode.light),
                           child: ClipOval(
                             child: BackdropFilter(
                               filter: ImageFilter.blur(
@@ -132,7 +133,17 @@ class ChooseModePage extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: 50),
-                BasicAppButton(onPressed: () {}, title: 'Continue')
+                BasicAppButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              SignupOrSigninPage(),
+                        ),
+                      );
+                    },
+                    title: 'Continue')
               ],
             ),
           ),
