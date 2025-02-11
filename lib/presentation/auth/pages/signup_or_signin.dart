@@ -4,6 +4,8 @@ import 'package:dart01/common/widgets/button/basic_app_button.dart';
 import 'package:dart01/core/configs/assets/app_images.dart';
 import 'package:dart01/core/configs/assets/app_vectors.dart';
 import 'package:dart01/core/configs/theme/app_colors.dart';
+import 'package:dart01/presentation/auth/pages/signin.dart';
+import 'package:dart01/presentation/auth/pages/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -61,7 +63,14 @@ class SignupOrSigninPage extends StatelessWidget {
                       Expanded(
                         flex: 1,
                         child: BasicAppButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (BuildContext context) => SignUpPage(),
+                              ),
+                            );
+                          },
                           title: 'Register',
                         ),
                       ),
@@ -69,7 +78,14 @@ class SignupOrSigninPage extends StatelessWidget {
                       Expanded(
                         flex: 1,
                         child: TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (BuildContext context) => SigninPage(),
+                              ),
+                            );
+                          },
                           child: Text(
                             'Sign in',
                             style: TextStyle(

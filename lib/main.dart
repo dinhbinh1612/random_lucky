@@ -1,7 +1,9 @@
 import 'package:dart01/core/configs/theme/app_theme.dart';
+import 'package:dart01/firebase_options.dart';
 import 'package:dart01/presentation/choose_mode/bloc/theme_cubit.dart';
 import 'package:dart01/presentation/splash/pages/splash.dart';
 import 'package:device_preview_plus/device_preview_plus.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,6 +17,7 @@ Future<void> main() async {
         ? HydratedStorageDirectory.web
         : HydratedStorageDirectory((await getTemporaryDirectory()).path),
   );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(DevicePreview(
     builder: (context) => MyApp(),
     enabled: true,
