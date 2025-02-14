@@ -7,6 +7,9 @@ import 'package:dart01/data/models/auth/create_user_req.dart';
 class SignupUseCase implements Usecase<Either, CreateUserReq> {
   @override
   Future<Either> call({CreateUserReq? params}) async {
-    return sl<AuthRepository>().signup(params!);
+    if (params == null) {
+      return Left('Missing required parameters');
+    }
+    return sl<AuthRepository>().signup(params);
   }
 }

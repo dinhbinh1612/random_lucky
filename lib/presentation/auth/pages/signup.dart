@@ -1,5 +1,6 @@
 import 'package:dart01/common/widgets/appbar/app_bar.dart';
 import 'package:dart01/common/widgets/button/basic_app_button.dart';
+import 'package:dart01/common/widgets/snackbar/basic_snackbar.dart';
 import 'package:dart01/core/configs/assets/app_vectors.dart';
 import 'package:dart01/data/models/auth/create_user_req.dart';
 import 'package:dart01/domain/usecases/auth/signup.dart';
@@ -9,11 +10,20 @@ import 'package:dart01/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class SignUpPage extends StatelessWidget {
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({super.key});
+
+  @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _fullName = TextEditingController();
+
   final TextEditingController _email = TextEditingController();
+
   final TextEditingController _password = TextEditingController();
-  SignUpPage({super.key});
+  bool _obscurtext = true;
 
   @override
   Widget build(BuildContext context) {
@@ -53,10 +63,7 @@ class SignUpPage extends StatelessWidget {
                   );
                   result.fold(
                     (l) {
-                      var snackBar = SnackBar(
-                        content: Text(l),
-                      );
-                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      basicSnackBar(context, l);
                     },
                     (r) {
                       Navigator.pushAndRemoveUntil(
@@ -105,9 +112,23 @@ class SignUpPage extends StatelessWidget {
   Widget _passwordField(BuildContext context) {
     return TextField(
       controller: _password,
-      obscureText: true,
-      decoration: InputDecoration(hintText: 'Password')
-          .applyDefaults(Theme.of(context).inputDecorationTheme),
+      obscureText: _obscurtext,
+      decoration: InputDecoration(
+        hintText: 'Password',
+        suffixIcon: Padding(
+          padding: const EdgeInsets.only(right: 10),
+          child: IconButton(
+            onPressed: () {
+              setState(() {
+                _obscurtext = !_obscurtext;
+              });
+            },
+            icon: Icon(
+              _obscurtext ? Icons.visibility : Icons.visibility_off,
+            ),
+          ),
+        ),
+      ).applyDefaults(Theme.of(context).inputDecorationTheme),
     );
   }
 
@@ -134,7 +155,7 @@ class SignUpPage extends StatelessWidget {
               );
             },
             child: Text(
-              'Register Now',
+              'Sign In',
               style: TextStyle(color: Colors.blue),
             ),
           ),

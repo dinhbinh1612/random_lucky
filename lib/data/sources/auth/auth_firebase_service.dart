@@ -16,6 +16,7 @@ class AuthFirebaseServiceImpl extends AuthFirebaseService {
       debugPrint("warning: 202");
       return Left('Email and password cannot be empty.');
     }
+
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: signinUserReq.email, password: signinUserReq.password);
